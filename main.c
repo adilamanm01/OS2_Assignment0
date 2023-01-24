@@ -1,36 +1,31 @@
-#include <stdio.h> 
-#include <sys/types.h> 
-#include <unistd.h> 
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include <sys/types.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
-int main(int argc, int argv) 
+int main(int argc, int argv)
 {
-    int n,max=200,i,c=1;
-    int a[100];
+    char buffer[50];
+    int c=1;
 
-   for(i=0;i<200;i++)
-   {
-    if(n<0)
-    printf("invalid entry");
-    else
-    {
-        if(n%2==0)
-        {
-            n=n/2;
-            scanf("%d",&a[i]);
-            n=a[i];
-            c=c+1;
-        }
-        else{
-                n=(3*n)+1;
-                scanf("%d",&a[i]);
-                n=a[i];
-                c=c+1;
-        }
-
+    argc = 11;
+    sprintf(buffer, "From Child %d init n = %d, ",c,argc);
+    printf("%s", buffer);
+  while(argc > 1){
+    if(argc % 2 == 0)
+    { 
+      argc = argc / 2;
+      sprintf(buffer, "From Child %d init n = %d, ",c,argc);
+      printf("%s", buffer);
     }
-   }
-   for(i=0;i<c;i++)
-   printf(" %d ",a[i]);
-   return 0;
-} 
-
+    else{ //for odd numbers
+      argc = argc * 3 + 1;
+      sprintf(buffer, "From Child %d init n = %d, ",c,argc);
+      printf("%s", buffer);
+    }
+  }
+  return 0;
+}
