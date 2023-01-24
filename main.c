@@ -2,30 +2,34 @@
 #include<stdlib.h>
 #include<string.h>
 #include <sys/types.h>
-#include <sys/types.h>
 #include <unistd.h>
 #include <sys/wait.h>
 
-int main(int argc, int argv)
+void function(int N)
 {
     char buffer[50];
     int c=1;
-
-    argc = 11;
-    sprintf(buffer, "From Child %d init n = %d, ",c,argc);
+    sprintf(buffer, "From Child %d init n = %d, ",c,N);
     printf("%s", buffer);
-  while(argc > 1){
-    if(argc % 2 == 0)
+  while(N > 1){
+    if(N % 2 == 0)
     { 
-      argc = argc / 2;
-      sprintf(buffer, "From Child %d init n = %d, ",c,argc);
+      N = N / 2;
+      sprintf(buffer, "From Child %d init n = %d, ",c,N);
       printf("%s", buffer);
     }
     else{ //for odd numbers
-      argc = argc * 3 + 1;
-      sprintf(buffer, "From Child %d init n = %d, ",c,argc);
+      N = N * 3 + 1;
+      sprintf(buffer, "From Child %d init n = %d, ",c,N);
       printf("%s", buffer);
     }
   }
-  return 0;
+}
+
+
+int main(int argc, int argv)
+{
+    if(argc>0 || argc<40)
+    function(argc);
+    return 0;
 }
