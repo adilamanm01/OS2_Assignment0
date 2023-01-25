@@ -9,6 +9,7 @@ void function(int N)
 {
     char buffer[50];
     int c=1;
+    printf("%d  \n",N); //debug print for N
     sprintf(buffer, "From Child %d init n = %d, ",c,N);
     printf("%s", buffer);
   while(N > 1){
@@ -27,9 +28,12 @@ void function(int N)
 }
 
 
-int main(int argc, int argv)
+int main(int argc, char* argv[])
 {
-    if(argc>0 || argc<40)
-    function(argc);
+    int x = atoi(argv[1]);
+    
+    if(x>0 || x<40)
+    function(x);
+    
     return 0;
 }
