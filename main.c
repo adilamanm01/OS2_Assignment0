@@ -15,16 +15,16 @@ void function(int N,int c)
     if(N % 2 == 0)
     { 
       N = N / 2;
-      sprintf(buffer, "From Child %d init n = %d, ",c,N);
+      sprintf(buffer, "From Child %d n = %d, ",c,N);
       printf("%s", buffer);
     }
     else{ //for odd numbers
       N = N * 3 + 1;
-      sprintf(buffer, "From Child %d init n = %d, ",c,N);
+      sprintf(buffer, "From Child %d n = %d, ",c,N);
       printf("%s", buffer);
     }
   }
-  printf("\n\n");
+  printf("\n");
 }
 
 
@@ -41,18 +41,19 @@ int main(int argc, char* argv[])
 	if (pid == 0) {
             
             if(x>0 || x<40)
+            wait(0);
             function(x,1);
 	}
 
 	else {
 		pid1 = fork();
 		if (pid1 == 0) {
-			sleep(2);
+			wait(0);
 			function(x+3,2);
 		}
 		else {
-			sleep(3);
-				printf("parent --> pid = %d\n", getpid());
+			   sleep(1);
+				printf("Children Completed\n");
 			
 		}
 	}
