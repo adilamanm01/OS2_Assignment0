@@ -5,11 +5,10 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-void function(int N)
+void function(int N,int c)
 {
     char buffer[50];
-    int c=1;
-    printf("%d  \n",N); //debug print for N
+    
     sprintf(buffer, "From Child %d init n = %d, ",c,N);
     printf("%s", buffer);
   while(N > 1){
@@ -25,15 +24,38 @@ void function(int N)
       printf("%s", buffer);
     }
   }
+  printf("\n\n");
 }
 
 
+// Driver code
 int main(int argc, char* argv[])
 {
-    int x = atoi(argv[1]);
-    
-    if(x>0 || x<40)
-    function(x);
-    
-    return 0;
+	int pid, pid1, pid2;
+	int x = atoi(argv[1]);
+
+	pid = fork();
+
+	// If fork() returns zero then it
+	// means it is child process.
+	if (pid == 0) {
+            
+            if(x>0 || x<40)
+            function(x,1);
+	}
+
+	else {
+		pid1 = fork();
+		if (pid1 == 0) {
+			sleep(2);
+			function(x+3,2);
+		}
+		else {
+			sleep(3);
+				printf("parent --> pid = %d\n", getpid());
+			
+		}
+	}
+
+	return 0;
 }
