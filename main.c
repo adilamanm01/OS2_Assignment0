@@ -1,10 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
 #include <sys/types.h>
-#include <unistd.h>
 #include <sys/wait.h>
-
+#include <unistd.h>
+#include<stdlib.h>
 void function(int N,int c)
 {
     char buffer[50];
@@ -24,39 +22,23 @@ void function(int N,int c)
       printf("%s", buffer);
     }
   }
-  printf("\n");
+  printf("\n\n");
 }
 
-
-// Driver code
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-	int pid, pid1, pid2;
-	int x = atoi(argv[1]);
+    int x = atoi(argv[1]);
 
-	pid = fork();
-
-	// If fork() returns zero then it
-	// means it is child process.
-	if (pid == 0) {
-            
-            if(x>0 || x<40)
-            wait(0);
-            function(x,1);
-	}
-
-	else {
-		pid1 = fork();
-		if (pid1 == 0) {
-			wait(0);
-			function(x+3,2);
-		}
-		else {
-			   sleep(1);
-				printf("Children Completed\n");
-			
-		}
-	}
-
-	return 0;
+    // child process because return value zero
+    if (fork() == 0)
+        function(x+3,2);
+    // parent process because return value non-zero.
+    else
+    {  
+        function(x,1);
+        wait(0);
+        printf("Children Completed");
+        
+    }
+    return 0;
 }
