@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
   //calling fork()
 	pid = fork();
 	//condition for input number limit
-  if(x>0 || x<40)
+  if(x>0 && x<40)
   {
     // If fork() returns zero then it
 	// means it is child process.
@@ -67,8 +67,7 @@ int main(int argc, char* argv[])
 	}
 
 	else {
-    //using wait() for child 1 to complete the process
-    wait(0);
+
     //calling fork()
 		pid1 = fork();
 		if (pid1 == 0) {
@@ -78,14 +77,16 @@ int main(int argc, char* argv[])
 		}
 		else {
       //parent
-      //using sleep() for delay
-      sleep(1);
       //using wait() for children to complete the process
-			   wait(0);
+			   wait(&pid);
+         wait(&pid1);
 				printf("Children Completed\n");
 			
 		}
 	}
+  }
+  else{
+    printf("Invalid Entry\n");
   }
 
 	return 0;
