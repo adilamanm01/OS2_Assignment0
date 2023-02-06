@@ -79,8 +79,8 @@ int main(int argc, char* argv[])
       //parent
       //using wait() for children to complete the process
 			   wait(&pid);
-         wait(&pid1);
-				printf("Children Completed\n");
+         		   wait(&pid1);
+		           printf("Children Completed\n");
 			
 		}
 	}
