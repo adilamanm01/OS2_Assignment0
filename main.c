@@ -42,7 +42,7 @@ void function(int N,int c)
     }
   }
   //printing in new line
-  printf("\n");
+  printf("\n\n");
 }
 
 
@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 	int pid, pid1;
   //converting a char type to integer type
 	int x = atoi(argv[1]);
-  //calling fork()
+  //calling fork() concurrently
 	pid = fork();
 	//condition for input number limit
   if(x>0 && x<40)
